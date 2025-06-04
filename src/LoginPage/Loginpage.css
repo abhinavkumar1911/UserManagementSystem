@@ -1,0 +1,26 @@
+.login-container {
+  background-color: rgba(15, 116, 224, 0.527);
+  padding: 2rem;
+  border-radius: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(20, 111, 209, 0.521);
+  width: 40%;
+  margin-right: 2%;
+  margin-left: auto;
+}
+#heading{
+    margin-top: 20px;
+}
+.wide-input {
+  width: 400px; /* Adjust as needed */
+  border-radius: 12px; /* Add rounded corners */
+  border: 1px solid #ccc; /* Default border color */
+  padding: 0.75rem 1rem; /* Adjust padding as needed */
+  transition: border-color 0.3s ease; /* Smooth transition for border color */
+}
+
+.wide-input:focus {
+  border-color: #007bff; /* Change border color when focused */
+  outline: none; /* Removes default outline */
+}
+
