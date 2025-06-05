@@ -1,18 +1,20 @@
 .login-container {
-  background-color: rgba(15, 116, 224, 0.527);
+  background-color: rgba(15, 116, 224, 0.9);
   padding: 2rem;
-  border-radius: 2rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(20, 111, 209, 0.521);
+  max-width: 500px;
   width: 40%;
   margin-right: 2%;
   margin-left: auto;
 }
 #heading{
     margin-top: 20px;
+    text-align: center;
 }
 .wide-input {
-  width: 400px; /* Adjust as needed */
+  width: 200%; /* Adjust as needed */
   border-radius: 12px; /* Add rounded corners */
   border: 1px solid #ccc; /* Default border color */
   padding: 0.75rem 1rem; /* Adjust padding as needed */

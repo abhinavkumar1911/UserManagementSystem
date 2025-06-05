@@ -1,21 +1,27 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import './App.css';
 import LoginPage from './LoginPage/Loginpage';
-import Dashboard from './Landingpage/Dashboard';
 import Adduser from './Landingpage/Adduser';
+import NavBar from './Landingpage/NavBar';
+import Logout from './Landingpage/Logout';
 
 function App() {
+  const location = useLocation();
+
+  // Don't show NavBar on login page
+  const hideNavBarOnPaths = ['/', '/logout'];
+  const shouldShowNavBar = !hideNavBarOnPaths.includes(location.pathname.toLowerCase());
+
   return (
     <div className="App">
-      <Routes>
-      <Route path='/' element={<LoginPage />} />
-      <Route path='/Dashboard' element={<Dashboard />} />
-    </Routes>
-    <Adduser/>
-    <main style={{ padding: '20px' }}>
-        <h1>Welcome!</h1>
-      </main>
+      {shouldShowNavBar && <NavBar />}
       
+      <Routes>
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/Edit" element={<Edit />} />
+        <Route path="/adduser" element={<Adduser />} />
+        <Route path="/logout" element={<Logout />} />
+      </Routes>
     </div>
   );
 }

@@ -1,0 +1,36 @@
+.add-form-container {
+  background-color: #f9f9f9;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+label {
+  font-weight: 500;
+}
+.custom-btn {
+  transition: background-color 0.3s ease;
+}
+
+.custom-btn:hover {
+  background-color: #0056b3; /* darker shade of Bootstrap primary */
+  color: white;
+}
+.btn-secondary.custom-btn:hover {
+  background-color: #6c757d;
+  color: white;
+}
+label {
+  float: left;
+  /* or display: inline-block; */
+}
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
