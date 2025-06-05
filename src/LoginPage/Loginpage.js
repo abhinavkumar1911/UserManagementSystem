@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-//import backgroundImage from '../Images/User-BackGround.webp'; // Make sure the image path is correct
-import { Col, Container, FormGroup, FormLabel, Row, FormControl, Button} from "react-bootstrap";
+//import backgroundImage from '../Images/User-BackGround.webp'; 
+import { Col, Container, FormGroup, FormLabel, Row, FormControl, Button, Form} from "react-bootstrap";
 import './Loginpage.css'
 import {  useNavigate } from "react-router-dom";
 
@@ -48,10 +48,11 @@ function LoginPage() {
   return (
     <div style={backgroundImageStyle}>
       {/* Container for the login form */}
-        
-         <Container  className="login-container">
+        <Container fluid className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}></Container>
+         <div  className="login-container">
          <h2 className="mb-4 mt-0 ms-0" id="heading">Login</h2>
-        <Row className="justify-content-right">
+         <Form>
+            <Row className="justify-content-right">
           <Col xs={12} md={6} lg={6}>
            
 
@@ -69,20 +70,29 @@ function LoginPage() {
             {error && <p className="text-danger mt-2 md-2">{error}</p>}
 
             {/* Login Button */}
-            <Button variant="primary" className="mt-3 w-48" type="submit" onClick={handleSubmit}>
-              Login
-            </Button>
-            <Button variant="secondary" className="mt-3 ms-5 w-48" type="cancel"
-            onClick={() => {
-                  setUser("");
-                  setPass("");
-                  setError("");}}
-            >
-              Cancel
-            </Button>
+            <div className="d-flex justify-content-between gap-3 mt-3">
+  <Button variant="primary" className="w-100" type="submit" onClick={handleSubmit}>
+    Login
+  </Button>
+  <Button
+    variant="secondary"
+    className="w-100"
+    type="button"
+    onClick={() => {
+      setUser('');
+      setPass('');
+      setError('');
+    }}
+  >
+    Cancel
+  </Button>
+</div>
           </Col>
         </Row>
-      </Container>
+         </Form>
+        
+        </div>
+    
      
      
     </div>

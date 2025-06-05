@@ -1,28 +1,41 @@
 import { Container, Row, Col, Form as BootstrapForm, Button } from "react-bootstrap";
-import './Form.css'; 
+import './Form.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Formschema } from "./Formschema";
 import { useFormik } from "formik";
+import { useState } from "react";
 
 function Adduser() {
-  const formvariable={
-    FName:'', 
-    LName:'',
-    Email:'',
-    Username:''
-  }
+  const [msg, setMsg] = useState("");
 
-  
-  const{handleChange,handleSubmit,values,errors,handleBlur,touched,resetForm}=useFormik({
-    initialValues: formvariable,
-    validationSchema:Formschema,
-    onSubmit: (values,action) => {
-    console.log("Form Submitted", values);
-    action.resetForm();
+  const formik = useFormik({
+    initialValues: {
+      UName: '',
+      Email: '',
+      Username: ''
+    },
+    validationSchema: Formschema,
+    onSubmit: (values, actions) => {
+      fetch("https://jsonplaceholder.typicode.com/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(values)
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("User added:", data);
+          setMsg("User added successfully!");
+          actions.resetForm();
+        })
+        .catch((err) => {
+          console.error("Error adding user:", err);
+          setMsg("Error adding user.");
+        });
     }
+  });
 
-  })
-    
   return (
     <Container className="add-form-container mt-5">
       <Row className="mb-4">
@@ -31,50 +44,73 @@ function Adduser() {
         </Col>
       </Row>
 
-      <BootstrapForm onSubmit={handleSubmit}>
+      <BootstrapForm onSubmit={formik.handleSubmit}>
         <Row>
-          <Col md={6} className="mb-3">
-            <BootstrapForm.Label><b>Student First Name</b></BootstrapForm.Label>
-            <BootstrapForm.Control type="text"  placeholder="Enter first name"  name="FName" value={values.FName} onChange={handleChange} onBlur={handleBlur}/>
-            <br/>
-            {errors.FName && touched.FName ? <span style={{color:'red'}}>{errors.FName}</span>:null}
-          </Col>
+          {/* User Name */}
+          <BootstrapForm.Label className="fw-bold text-start d-block">User Name</BootstrapForm.Label>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', maxWidth: '350px' }}>
+            <BootstrapForm.Control
+              style={{ maxWidth: '250px' }}
+              type="text"
+              placeholder="Enter your name"
+              name="UName"
+              value={formik.values.UName}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+            {formik.errors.UName && formik.touched.UName && (
+              <span style={{ color: 'red', whiteSpace: 'nowrap' }}>{formik.errors.UName}</span>
+            )}
+          </div>
 
-          <Col md={6} className="mb-3">
-            <BootstrapForm.Label><b>Student Last Name</b></BootstrapForm.Label>
-            <BootstrapForm.Control type="text" placeholder="Enter last name"  name="LName" value={values.LName} onChange={handleChange} onBlur={handleBlur}/>
-              <br/>
-            {errors.LName && touched.LName ? <span style={{color:'red'}}>{errors.LName}</span>:null}
-          </Col>
+          {/* Email */}
+          <BootstrapForm.Label className="fw-bold text-start d-block">User Email ID</BootstrapForm.Label>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', maxWidth: '350px' }}>
+            <BootstrapForm.Control
+              style={{ maxWidth: '250px' }}
+              type="email"
+              placeholder="Enter email"
+              name="Email"
+              value={formik.values.Email}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+            {formik.errors.Email && formik.touched.Email && (
+              <span style={{ color: 'red', whiteSpace: 'nowrap' }}>{formik.errors.Email}</span>
+            )}
+          </div>
+
+          {/* Username */}
+          <BootstrapForm.Label className="fw-bold text-start d-block">Username</BootstrapForm.Label>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', maxWidth: '350px' }}>
+            <BootstrapForm.Control
+              style={{ maxWidth: '250px' }}
+              type="text"
+              placeholder="Enter Username"
+              name="Username"
+              value={formik.values.Username}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+            {formik.errors.Username && formik.touched.Username && (
+              <span style={{ color: 'red', whiteSpace: 'nowrap' }}>{formik.errors.Username}</span>
+            )}
+          </div>
         </Row>
 
         <Row>
-          <Col md={6} className="mb-3">
-            <BootstrapForm.Label><b>Student Email ID</b></BootstrapForm.Label>
-            <BootstrapForm.Control type="email" placeholder="Enter email"  name="Email" value={values.Email} onChange={handleChange} onBlur={handleBlur}/>
-              <br/>
-            {errors.Email && touched.Email ? <span style={{color:'red'}}>{errors.Email}</span>:null}
+          <Col className="text-center mt-3">
+            <Button variant="primary" type="submit" className="me-3 custom-btn">Submit</Button>
+            <Button variant="secondary" type="button" className="custom-btn" onClick={() => formik.resetForm()}>
+              Clear
+            </Button>
           </Col>
-
-          <Col md={6} className="mb-3">
-            <BootstrapForm.Label><b>Username</b></BootstrapForm.Label>
-            <BootstrapForm.Control type="tel" placeholder="Enter Username"  name="Username" value={values.Username} onChange={handleChange} onBlur={handleBlur}/>
-              <br/>
-            {errors.Username && touched.Username ? <span style={{color:'red'}}>{errors.Username}</span>:null}
-           </Col>
-        </Row>
-
-        
-
-        <Row>
-            <Col className="text-center mt-3">
-                 <Button variant="primary" type="submit" className="me-3 custom-btn">Submit</Button>
-                 <Button variant="secondary" type="reset" className="custom-btn" onClick={() => resetForm()}>Clear</Button>
-             </Col>
         </Row>
       </BootstrapForm>
+
+      {msg && <p className="mt-3 text-center text-success">{msg}</p>}
     </Container>
   );
 }
 
-export default Adduser
+export default Adduser;

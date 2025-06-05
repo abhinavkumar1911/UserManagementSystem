@@ -1,0 +1,18 @@
+/* Style for table headers */
+th {
+  font-weight: bold;
+  color: rgb(29, 26, 26);
+  background-color: #d84b0fe4; /* Green background */
+  padding: 10px;
+  text-align: center;
+}
+
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #ddd;
+}

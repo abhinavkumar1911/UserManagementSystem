@@ -4,6 +4,7 @@ import LoginPage from './LoginPage/Loginpage';
 import Adduser from './Landingpage/Adduser';
 import NavBar from './Landingpage/NavBar';
 import Logout from './Landingpage/Logout';
+import UserList from './Landingpage/UserList';
 
 function App() {
   const location = useLocation();
@@ -18,8 +19,10 @@ function App() {
       
       <Routes>
         <Route path="/" element={<LoginPage />} />
-        <Route path="/Edit" element={<Edit />} />
+      
         <Route path="/adduser" element={<Adduser />} />
+        <Route path="/userlist" element={<UserList />} />
+
         <Route path="/logout" element={<Logout />} />
       </Routes>
     </div>
