@@ -2,7 +2,7 @@
 th {
   font-weight: bold;
   color: rgb(29, 26, 26);
-  background-color: #d84b0fe4; /* Green background */
+  background-color: #d84b0fe4;
   padding: 10px;
   text-align: center;
 }
@@ -15,4 +15,58 @@ table {
 
 th, td {
   border: 1px solid #ddd;
+}
+.button-custom{
+  background-color: #2563eb; 
+  color: white;
+  font-weight: 600;
+  padding: 0.5rem 1rem; 
+  border-radius: 0.25rem; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+  transition: background-color 0.3s ease;
+}
+.text-left{
+  text-align: left;
+}
+
+.button-custom:hover {
+  background-color: #324372;
+  border-radius: 20px;        
+  transform: scale(1.05);     
+  color: white;
+}
+
+.label-input-group {
+  flex-grow: 1;
+  max-width: 80%;
+}
+
+.custom-input {
+  width: 100%; 
+  min-width: 250px;
+}
+.custom-edit-btn {
+  transition: all 0.3s ease;
+  border-radius: 4px;
+}
+
+
+.custom-edit-btn:hover {
+  background-color: #218838; 
+  border-radius: 20px;        
+  transform: scale(1.05);     
+  color: white;
+}
+
+.custom-delete-btn {
+  transition: all 0.3s ease;
+  border-radius: 4px;
+}
+
+
+.custom-delete-btn:hover {
+  background-color: #862828; 
+  border-radius: 20px;        
+  transform: scale(1.05);     
+  color: white;
 }
