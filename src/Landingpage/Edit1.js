@@ -6,6 +6,7 @@ import { useFormik } from "formik";
 import { useState, useEffect } from "react"; 
 import axios from "axios";
 
+
 function Edit1() { 
   const [msg, setMsg] = useState("");
   const [userId, setUserId] = useState(null); 
@@ -26,13 +27,13 @@ function Edit1() {
       setUserId(id);
     setInitialValues({ name: name || '', email: email || '', username: username || '' })
 }, []);
-
+  
  const formik = useFormik({
   initialValues,
   enableReinitialize: true,
   validationSchema: Formschema,
   onSubmit: async (values, actions) => {
-  setMsg("")
+  setMsg("User Updated")
 
   if (!userId) {
     setMsg("User ID not found. Cannot update.")
