@@ -83,6 +83,15 @@ function UserList() {
   };
 
 
+  //Edit the User
+
+  const setDataToStorage = (id, name, email, username) => {
+    localStorage.setItem("id", id);
+    localStorage.setItem("name", name);
+    localStorage.setItem("email", email);
+    localStorage.setItem("username", username);
+  }
+
   return (
     <Container className="mt-5">
       {/* <h2 className="mb-4 text-center">User List</h2>*/}
@@ -131,7 +140,9 @@ function UserList() {
                   <td>{user.email}</td>
                   <td>{user.username}</td>
 
-                  <td><Link to="/Edit"><button className="btn btn-success custom-edit-btn" >Edit</button></Link></td>
+                  <td><Link to="/Edit1"><button className="btn btn-success custom-edit-btn" 
+                  onClick={()=>setDataToStorage(user.id,user.name,user.email,user.username)}
+                  >Edit</button></Link></td>
                   <td><button className="btn btn-danger custom-delete-btn"
                     onClick={() => handleDelete(user.id)}
                   >Delete</button></td>

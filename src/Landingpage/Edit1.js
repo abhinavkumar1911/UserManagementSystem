@@ -3,87 +3,76 @@ import './Form.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Formschema } from "./Formschema";
 import { useFormik } from "formik";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react"; 
+import axios from "axios";
 
-function Edit() {
+function Edit1() { 
   const [msg, setMsg] = useState("");
-  const [id, setId] = useState(null); // We’ll store the user's ID here
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [username, setUsername] = useState(''); // Add fallback default
-
-  // Fetch data from localStorage when the component mounts
-  useEffect(() => {
-    const storedId = localStorage.getItem("id");
-    const storedName = localStorage.getItem("name");
-    const storedEmail = localStorage.getItem("email");
-    const storedUsername = localStorage.getItem("username");
-
-    if (storedId && storedName && storedEmail && storedUsername) {
-      setId(storedId);
-      setName(storedName);
-      setEmail(storedEmail);
-      setUsername(storedUsername || ''); // Default to an empty string if undefined
-    }
-  }, []);
-
-  const formik = useFormik({
-    initialValues: {
-      name: name || '',
-      email: email || '',
-      username: username || ''  // Ensure username has a valid fallback
-    },
-    validationSchema: Formschema,
-    enableReinitialize: true, // Reinitialize form when state changes
-    onSubmit: async (values, actions) => {
-      const userId = id;
-
-      if (!userId) {
-        console.error("No user ID found");
-        setMsg("Error: No user ID found.");
-        return;
-      }
-
-      // Handle PUT or PATCH request to update user
-      try {
-        const response = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}`, {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(values),
-        });
-
-        console.log("Response status:", response.status);
-
-        if (response.ok) {
-          const data = await response.json();
-          console.log("User updated:", data);
-          setMsg("User updated successfully!");
-
-          // Update localStorage with new values (simulate persistence)
-          localStorage.setItem("name", values.name);
-          localStorage.setItem("email", values.email);
-          localStorage.setItem("username", values.username);
-
-          actions.resetForm();
-        } else {
-          throw new Error('Failed to update user');
-        }
-      } catch (error) {
-        console.error("Error updating user:", error);
-        setMsg("Error updating user.");
-      }
-    }
+  const [userId, setUserId] = useState(null); 
+  const [initialValues, setInitialValues] = useState({
+    name: '',
+    email: '',
+    username: ''
   });
+
+  //Load user data from localStorage
+  useEffect(() => {
+    const id = localStorage.getItem("id")
+    const name = localStorage.getItem("name")
+    const email = localStorage.getItem("email")
+    const username = localStorage.getItem("username")
+    console.log("Loaded user info from localStorage:", { id, name, email, username })
+
+      setUserId(id);
+    setInitialValues({ name: name || '', email: email || '', username: username || '' })
+}, []);
+
+ const formik = useFormik({
+  initialValues,
+  enableReinitialize: true,
+  validationSchema: Formschema,
+  onSubmit: async (values, actions) => {
+  setMsg("")
+
+  if (!userId) {
+    setMsg("User ID not found. Cannot update.")
+    actions.setSubmitting(false)
+    return
+  }
+
+  try {
+    const response = await axios.put(`https://jsonplaceholder.typicode.com/users/${userId}`, values, {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+
+    console.log("User updated:", response.data)
+    setMsg("User updated successfully!")
+    actions.resetForm({ values })
+
+  } catch (error) {
+    console.error("Error updating user:", error);
+    setMsg("Error updating user.");
+  } finally {
+    actions.setSubmitting(false);
+  }
+}
+
+});
+
+
 
   return (
     <Container className="add-form-container mt-5">
       <Row className="mb-4">
         <Col>
-          <h2 className="text-center">Edit User Details</h2>
+          <h2 className="text-center">Edit Student Details</h2>
         </Col>
       </Row>
 
-      <BootstrapForm onSubmit={formik.handleSubmit}>
+      <BootstrapForm onSubmit={formik.onSubmit}>
+       
         <Row>
           {/* User Name */}
           <BootstrapForm.Label className="fw-bold text-start d-block">User Name</BootstrapForm.Label>
@@ -139,7 +128,10 @@ function Edit() {
 
         <Row>
           <Col className="text-center mt-3">
-            <Button variant="primary" type="submit" className="me-3 custom-btn">Update</Button>
+            <Button variant="primary" type="submit" className="me-3 custom-btn" disabled={formik.isSubmitting}>
+  {formik.isSubmitting ? "Updating..." : "Update"}
+</Button>
+
             <Button variant="secondary" type="button" className="custom-btn" onClick={() => formik.resetForm()}>
               Clear
             </Button>
@@ -152,4 +144,4 @@ function Edit() {
   );
 }
 
-export default Edit;
+export default Edit1;

@@ -53,13 +53,13 @@ function Adduser() {
               style={{ maxWidth: '250px' }}
               type="text"
               placeholder="Enter your name"
-              name="UName"
-              value={formik.values.UName}
+              name="name"
+              value={formik.values.name}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
             />
-            {formik.errors.UName && formik.touched.UName && (
-              <span style={{ color: 'red', whiteSpace: 'nowrap' }}>{formik.errors.UName}</span>
+            {formik.errors.name && formik.touched.name && (
+              <span style={{ color: 'red', whiteSpace: 'nowrap' }}>{formik.errors.name}</span>
             )}
           </div>
 
@@ -68,15 +68,15 @@ function Adduser() {
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', maxWidth: '350px' }}>
             <BootstrapForm.Control
               style={{ maxWidth: '250px' }}
-              type="email"
+              type="Email"
               placeholder="Enter email"
-              name="Email"
+              name="email"
               value={formik.values.Email}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
             />
-            {formik.errors.Email && formik.touched.Email && (
-              <span style={{ color: 'red', whiteSpace: 'nowrap' }}>{formik.errors.Email}</span>
+            {formik.errors.email && formik.touched.email && (
+              <span style={{ color: 'red', whiteSpace: 'nowrap' }}>{formik.errors.email}</span>
             )}
           </div>
 
