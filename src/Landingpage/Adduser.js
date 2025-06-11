@@ -10,8 +10,8 @@ function Adduser() {
 
   const formik = useFormik({
     initialValues: {
-      UName: '',
-      Email: '',
+      name: '',
+      email: '',
       Username: ''
     },
     validationSchema: Formschema,
@@ -71,7 +71,7 @@ function Adduser() {
               type="Email"
               placeholder="Enter email"
               name="email"
-              value={formik.values.Email}
+              value={formik.values.email}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
             />

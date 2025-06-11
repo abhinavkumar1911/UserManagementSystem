@@ -34,14 +34,14 @@ function LoginPage() {
    
   // Styling for the background image
   const backgroundImageStyle = {
-    backgroundImage: `url('/Images/User-BackGround.webp')`, 
+    backgroundImage: `url(${process.env.PUBLIC_URL}/Images/User-BackGround.webp)`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     height: '100vh',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center', 
-    pading:'1rem'
+    padding:'1rem'
 
   };
 
