@@ -19,7 +19,7 @@ function NavBar(){
       <ul className={`nav-links ${isOpen ? 'show' : ''}`}>
         <li><Link to="/Adduser">Add user</Link></li>
        <li><Link to="/UserList">Show user</Link></li>
-       <li><Link to="/logout">Logout</Link></li>
+      {/* <li><Link to="/logout">Logout</Link></li> */}
       </ul>
     </nav>
   );

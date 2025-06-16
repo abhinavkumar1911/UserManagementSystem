@@ -11,20 +11,22 @@ function App() {
   const location = useLocation();
 
   // Don't show NavBar on login page
-  const hideNavBarOnPaths = ['/', '/logout'];
-  const shouldShowNavBar = !hideNavBarOnPaths.includes(location.pathname.toLowerCase());
+  {/*const hideNavBarOnPaths = ['/', '/logout'];
+  const shouldShowNavBar = !hideNavBarOnPaths.includes(location.pathname.toLowerCase());*/}
 
   return (
     <div className="App">
-      {shouldShowNavBar && <NavBar />}
+     {/*} {shouldShowNavBar && <NavBar />}*/}
+     <NavBar />
       
       <Routes>
-        <Route path="/" element={<LoginPage />} />
-      
+       {/*} <Route path="/" element={<LoginPage />} /> */}
+        
+        <Route path="/" element={<Adduser />} />
         <Route path="/adduser" element={<Adduser />} />
         <Route path="/userlist" element={<UserList />} />
         <Route path='/Edit1' element={<Edit1 />}/>
-        <Route path="/logout" element={<Logout />} />
+        {/*<Route path="/logout" element={<Logout />} /> */}
       </Routes>
     </div>
   );
